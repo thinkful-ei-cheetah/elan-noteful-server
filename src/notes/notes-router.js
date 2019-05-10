@@ -8,7 +8,7 @@ const jsonParser = express.json()
 
 const serializeNote = note => ({
   id: note.id,
-  title: xss(note.title),
+  name: xss(note.name),
   modified: note.modified,
   folder_id: note.folder_id,
   content: xss(note.content)
@@ -25,8 +25,8 @@ notesRouter
       .catch(next)
   })
   .post(jsonParser, (req, res, next) => {
-    const { title, content, folder_id } = req.body
-    const newNote = { title, content, folder_id }
+    const { name, content, folder_id } = req.body
+    const newNote = { name, content, folder_id }
 
     for (const [key, value] of Object.entries(newNote))
       if (value == null)
@@ -74,13 +74,13 @@ notesRouter
       req.params.note_id
     )
       .then(numRowsAffected => {
-        res.status(204).end()
+        res.status(204).json({})
       })
       .catch(next)
   })
   .patch(jsonParser, (req, res, next) => {
-    const { title, content } = req.body
-    const noteToUpdate = { title, content }
+    const { name, content, folder_id } = req.body
+    const noteToUpdate = { name, content, folder_id }
 
     const numberOfValues = Object.values(noteToUpdate).filter(Boolean).length
     if (numberOfValues === 0)

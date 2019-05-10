@@ -1,7 +1,7 @@
 TRUNCATE folders, notes RESTART IDENTITY CASCADE;
 
 INSERT INTO folders
-  (title)
+  (name)
   VALUES
     ('Elan'),
     ('Green'),
@@ -15,7 +15,7 @@ INSERT INTO folders
     ('Green');
 
 INSERT INTO notes
-  (title, folder_id, content)
+  (name, folder_id, content)
   VALUES
   ('First Note', 1, 'Hello World'),
   ('Second Note', 2, 'Hello World'),
